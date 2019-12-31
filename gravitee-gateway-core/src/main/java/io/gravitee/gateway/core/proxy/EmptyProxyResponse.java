@@ -22,6 +22,10 @@ import io.gravitee.gateway.api.handler.Handler;
 import io.gravitee.gateway.api.proxy.ProxyResponse;
 import io.gravitee.gateway.api.stream.ReadStream;
 
+/**
+ * @author David BRASSELY (david.brassely at graviteesource.com)
+ * @author GraviteeSource Team
+ */
 public class EmptyProxyResponse implements ProxyResponse {
 
     private Handler<Buffer> bodyHandler;
@@ -33,6 +37,8 @@ public class EmptyProxyResponse implements ProxyResponse {
 
     public EmptyProxyResponse(int statusCode) {
         this.statusCode = statusCode;
+
+        //TODO: connection header no more available in HTTP2
         httpHeaders.set(HttpHeaders.CONNECTION, HttpHeadersValues.CONNECTION_CLOSE);
     }
 

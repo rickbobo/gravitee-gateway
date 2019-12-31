@@ -16,6 +16,7 @@
 package io.gravitee.gateway.standalone.vertx.ws;
 
 import io.gravitee.gateway.api.Request;
+import io.gravitee.gateway.api.Response;
 import io.gravitee.gateway.api.ws.WebSocket;
 import io.gravitee.gateway.standalone.vertx.VertxHttpServerRequest;
 import io.vertx.core.http.HttpServerRequest;
@@ -28,7 +29,7 @@ public class VertxWebSocketServerRequest extends VertxHttpServerRequest {
 
     private VertxWebSocket vertxWebSocket;
 
-    public VertxWebSocketServerRequest(HttpServerRequest httpServerRequest) {
+    VertxWebSocketServerRequest(HttpServerRequest httpServerRequest) {
         super(httpServerRequest);
 
         this.vertxWebSocket = new VertxWebSocket(httpServerRequest);
@@ -52,5 +53,10 @@ public class VertxWebSocketServerRequest extends VertxHttpServerRequest {
     @Override
     public boolean isWebSocket() {
         return true;
+    }
+
+    @Override
+    public Response create() {
+        return new VertxWebSocketServerResponse(this);
     }
 }
